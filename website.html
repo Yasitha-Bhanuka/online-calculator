@@ -1,1 +1,37 @@
-<button>hello</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML CSS REVIEW</title>
+  <style>
+    .red-button{
+      background-color: rgb(255, 3, 45);
+      cursor: pointer;
+      color: rgb(255, 255, 255);
+      border: none;
+    }
+    .yellow-button{
+      background-color: yellow;
+    }
+  </style>
+</head>
+<body>
+  <button title="tooltip" class="red-button" onclick="
+      alert('Good job');
+    ">
+    hello
+  </button>
+    
+  <p>
+    paragraph  of 
+    <button title="tooltip2" class="yellow-button">
+      hello
+    </button> 
+    text
+  </p>
+  <script>
+    alert('hello');
+  </script>
+</body>
+</html>
