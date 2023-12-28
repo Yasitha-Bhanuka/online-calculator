@@ -15,10 +15,15 @@
      gap: 10px;
      margin: 12px 0;
      width: 278px;
+     border: 1px solid black;
+     padding: 10px;
+     border-radius: 12px;
+     box-shadow: 8px 8px 3px 1px rgb(112, 112, 112);
+     background-color: white;
     }
     .info{
       margin-top: 50px;
-    } 
+    }
     button{
       border: none;
       border-radius: 50%;
@@ -43,14 +48,38 @@
       align-items: center;
       margin: 3px;
       padding-right: 10px;
-      font-size: 22px;
       color: white;
+      height: 70px;
+      border-radius: 20px;
+    }
+    .js-caltotal{
       font-family: Arial, Helvetica, sans-serif;
+      font-size: 35px;
+      padding: 0px;
+    }
+    .name{
+      color: rgb(50, 50, 50);
+      padding-left: 20px;
+      padding: 15px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      font-size: 20px;
+      font-weight: bold;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .brand{
+      font-size: 14px;
+      font-weight: bold;
+      font-family: 'Times New Roman', Times, serif
     }
   </style>
  </head>
 <body> 
   <div class="container">
+    <div class="name">Yasitha's Calculator
+      <div class="brand">*casio</div>
+    </div>
     <div class="caltotaldiv">
       <p class="js-caltotal"></p>
     </div>
@@ -118,16 +147,13 @@
       ">.</button>
       
       <button onclick="
-        console.log(typeof eval(calculation));
-        if (previous !== ''){
-          calculation += previous;
-        }
-        total  += eval (calculation);
-        previous = String(total);
-        document.querySelector('.js-caltotal').innerHTML = `${total}`;
 
-        calculation = '';
-        localStorage.setItem('calculation' , JSON.stringify(total));
+        calculation = eval(calculation);
+
+        displayCalculation();
+        
+        localStorage.setItem('calculation', calculation);
+
       ">=</button>
 
       <button class="calc" onclick="
@@ -137,11 +163,12 @@
     </div>
     <div>
       <button class="clearbtn" onclick="
+        
         calculation = '';
-        console.log(calculation);
-        total = 0;
-        updateCalculation('0');
-        localStorage.removeItem('calculation');
+
+        displayCalculation();
+
+        localStorage.setItem('calculation', calculation);
         ">Clear</button>
 
     </div>
@@ -149,22 +176,22 @@
 
   <script>
     let calculation = localStorage.getItem('calculation') || '0';
-    let total = 0;
-    let previous = '';
+    
+    displayCalculation();
 
     function updateCalculation (value) {
       calculation += value;
-      console.log(calculation);
       
-      localStorage.setItem('calculation' , JSON.stringify(calculation));
-      (total === 0) ? document.querySelector('.js-caltotal').innerHTML = `${calculation}` : document.querySelector('.js-caltotal').innerHTML = `${total} ${calculation}`;
+      displayCalculation();
+
+      localStorage.setItem('calculation' , calculation);
+      
+    }
+
+    function displayCalculation(){
+      document.querySelector('.js-caltotal').innerHTML = calculation;
     }
     
-    // !(localStorage.getItem('calculation')) ? console.log( calculation) : console.log(JSON.parse(localStorage.getItem('calculation'))) ; 
-
-    // function saveCalculation (){
-    //   localStorage.setItem('calculation' , calculation);
-    // }
   </script> 
 </body>
 </html>
